@@ -24,5 +24,13 @@
     "pug": "^2.0.4",
     "socket.io": "^2.3.0"
   },
-  "devDependencies": {}
+  "devDependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/natinan123/Backend-nodejs.git"
+  },
+  "bugs": {
+    "url": "https://github.com/natinan123/Backend-nodejs/issues"
+  },
+  "homepage": "https://github.com/natinan123/Backend-nodejs#readme"
 }
