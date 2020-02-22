@@ -11,7 +11,9 @@ var http = require('http');
 var port = normalizePort(process.env.PORT || '3000');
 // ** Create HTTP server. // *
 var server = http.createServer(app);
-var io = require('socket.io').listen(server);
+var io = require('socket.io').listen(server)
+module.exports = io;
+
 // todo : email 
 var mailer = require("nodemailer");
 // ! end email
@@ -158,7 +160,6 @@ var unfollow = require('./router/delete/un_follow');
 
 // todo : test
 var testgetimage = require('./router/test/get-image');
-var socket = require('./router/test/socket.io/soctet');
 
 
 
@@ -320,7 +321,6 @@ app.use('/testgetimage', testgetimage);                           // ลอง�
 
 // email
 app.use('/email', email);                       // email
-app.use('/', socket);
 
 
 
@@ -344,19 +344,29 @@ app.use(function (err, req, res, next) {
 
 
 
+var newMessage = require("./router/test/socket.io/soctet") //route file dir
+
+
+
 // todo : Use socket.io 
+
+
 io.on('connection', function (socket) {
   // แสดงข้อความ "a user connected" ออกมาทาง console
   console.log('a user connected');
 
-  socket.on('new-message', (message) => {
-    io.emit(message);
-    console.log(message);
+  socket.on('new-message', newMessage);
 
-  });
+  socket.emit('msg', { msg: 'Welcome bro!' });
+  socket.on('msg',function(msg){
+    socket.emit('msg', { msg: "you sent : "+msg });
+    console.log(msg);
+  })
 
 
 });
+
+
 
 // ! end todo socket
 
@@ -416,12 +426,6 @@ function onError(error) {
       throw error;
   }
 }
-
-
-
-
-
-
 
 
 module.exports = app;

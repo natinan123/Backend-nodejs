@@ -22,7 +22,7 @@ router.get('/:search', function (req, res, next) {
                 email_id: row[i].email_id,
                 fname: row[i].fname,
                 lname: row[i].lname,
-                // profile_pic: row[i].profile_pic,
+                cus_status: row[i].cus_status,
                 profile_pic: fs.readFileSync(partImage.avatar + element, 'base64')
             })
             // console.log(result)

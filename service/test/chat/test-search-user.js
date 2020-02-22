@@ -9,7 +9,8 @@ var chat = {
         var sql = `SELECT   customer.email_id,
                             customer.fname,
                             customer.lname,
-                            customer.profile_pic
+                            customer.profile_pic,
+                            customer.cus_status
                             FROM
                             customer
                             WHERE customer.email_id LIKE '%${search}%' or
