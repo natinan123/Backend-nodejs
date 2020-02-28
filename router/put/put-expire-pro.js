@@ -1,10 +1,11 @@
 var express = require('express') ;
 var router =express.Router();
-var countup = require('../../../service/select/get-require/get-count-upgarde');
+var expire = require('../../service/update/put-expire-pro');
 
 router.get('/',function(req,res,next){
-// var data=req.body
-    countup.countup((err,row) =>{
+// var data=req.body;
+// console.log(data);
+    expire.expire((err,row) =>{
         if(err){
             res.json(err);
         }

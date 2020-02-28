@@ -17,7 +17,6 @@ router.get('/:source', function (req, res, next) {
             var element1 = row[i].sou_profile_pic;
             var element2 = row[i].des_profile_pic;
        
-            var partAddr = 'D:/project-property/Backend/uploads/avatar/';
             result.push(data = {
 
                 source: row[i].source,

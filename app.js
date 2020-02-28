@@ -40,7 +40,7 @@ var userchat = require('./router/test/chat/test-get-chat-user');
 var postchat = require('./router/test/chat/test-post-chat');
 var searchuser = require('./router/test/chat/test-search-user');
 var firstchat = require('./router/test/chat/test-first-chat');
-
+var chatlist = require('./router/test/chat/chat-list');
 // email
 var email = require('./router/test/mail/send-mail');
 
@@ -61,7 +61,7 @@ var postdraft = require('./router/post/post-pro/post-pro-draft');
 var postdraftstyle = require('./router/post/post-pro/post-pro-draft-style');
 var postproimage = require('./router/post/post-image/post-pro-image');
 var postFavorate = require('./router/post/post-favorite');
-
+var post_packet = require('./router/post/post-pro/post-packet')
 
 
 // todo :get
@@ -76,8 +76,7 @@ var zone = require('./router/get/get-loc-zone');
 var province = require('./router/get/get-loc-province');
 var location = require('./router/get/get-loc-location');
 
-// ! ยกเลิก var getupgrade = require('./router/get/get-require/get-req-upgrade');
-// ! ยกเลิก var countup = require('./router/get/get-require/get-count-upgarde');
+
 var recommainpage = require('./router/get/get-recom-mainpage');
 // อสังหา
 var house = require('./router/get/get-pro/get-pro-house');
@@ -133,6 +132,7 @@ var profollow = require('./router/get/get-pro/get-mainpage/get-pro-favorite')
 var follow = require('./router/get/get-pro/get-mainpage/get_follow')
 var guide_price = require('./router/get/get-pro/get-pro-seller/guide_price')
 var pro_public = require('./router/get/get-pro/get-pro-public')
+var packet = require('./router/get/get-require/get-packet')
 // todo :select
 // ? get version 2
 
@@ -150,13 +150,12 @@ var artview = require('./router/put/put-art-view');
 var putprofile = require('./router/put/put-profile');
 var putprolimit = require('./router/put/put-pro_limit');
 var putavatar = require('./router/put/profile-image');
-
+var expire = require('./router/put/put-expire-pro')
 
 // todo :delete
 var deletelocation = require('./router/delete/delete-location');
 var deletereq = require('./router/delete/delete-req');
 var unfollow = require('./router/delete/un_follow');
-// ! ยกเลิก var deleteupgrade = require('./router/delete/delete-req-upgrade');
 
 // todo : test
 var testgetimage = require('./router/test/get-image');
@@ -206,8 +205,6 @@ app.use('/zone', zone);                                 // ภูมิภาค
 app.use('/province', province);                         // จังหวัด  
 app.use('/location', location);                         // เขตในจังหวัด  
 
-// ! ยกเลิก app.use('/getupgrade', getupgrade);                     // รายการร้องขอ การอัพเกรด
-// ! ยกเลิก app.use('/countup', countup);                           // count รายการร้องขอ 
 app.use('/protype', protype);                           // อสังหา จาก ประเภท  
 app.use('/recommainpage', recommainpage);               // รายการแนะนำ  
 app.use('/type', type);                                 // ประเภทอสังหา 
@@ -249,7 +246,7 @@ app.use('/profollow', profollow);                       // รายการ �
 app.use('/follow', follow);                             // เช็ค อสัง ที่ติดตาม
 app.use('/guide_price', guide_price);                   // ราคาแนะนำ
 app.use('/pro_public', pro_public);                     // รายการ อสัง เผยแพร่
-
+app.use('/packet', packet);                             // รายการส่งมาร้องขอแนะนำ
 
 
 
@@ -272,6 +269,8 @@ app.use('/artview', artview);                           //  อัพยอด�
 app.use('/putprofile', putprofile);                     //  อัพเดตโปรไฟล
 app.use('/putprolimit', putprolimit);                   //  อัพเดตสิทธิการโพส
 app.use('/putavatar', putavatar);                       //  อัพเดต avatar
+app.use('/expire', expire);                             //  อัพเดต อสังหาริมทรัพย์หมดอายุ
+
 
 
 // todo :insert - post
@@ -288,6 +287,7 @@ app.use('/postpro', postpro);                           // เพิ่มอส
 app.use('/poststyle', poststyle);                       // เพิ่มอสังหา style
 app.use('/postdraft', postdraft);                       // เพิ่มอสังหา ร่าง
 app.use('/postdraftstyle', postdraftstyle);             // เพิ่มอสังหา ร่าง style
+app.use('/post_packet', post_packet);                   // ส่งไปรายการแนะนำ
 
 
 
@@ -296,8 +296,6 @@ app.use('/postdraftstyle', postdraftstyle);             // เพิ่มอส
 app.use('/deletelocation', deletelocation);
 app.use('/deletereq', deletereq);
 app.use('/unfollow', unfollow);             // Un follow
-
-// ! ยกเลิก app.use('/deleteupgrade', deleteupgrade);               // ลบรายการ อัพเกรด
 
 
 
@@ -316,6 +314,7 @@ app.use('/userchat', userchat);                         // get test user chat
 app.use('/postchat', postchat);                         // post test chat chat
 app.use('/searchuser', searchuser);                     // get test user
 app.use('/firstchat', firstchat);                       // get test first chat
+app.use('/chatlist', chatlist);                         // test first chat list
 
 app.use('/testgetimage', testgetimage);                           // ลองแสดงรูป
 
