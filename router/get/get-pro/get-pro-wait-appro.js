@@ -19,7 +19,7 @@ router.get('/', function (req, res, next) {
                 type_id: row[i].type_id,
                 type_name: row[i].type_name,
                 pro_sell: row[i].pro_sell,
-                pro_detail: row[i].pro_detail,
+                // pro_detail: row[i].pro_detail,
                 pro_area: row[i].pro_area,
                 pro_space: row[i].pro_space,
                 price: row[i].price,

@@ -1,6 +1,6 @@
 var db = require('../../../dbcon');
-var location = {
-    location: function (data, callback) {
+var selltype = {
+    selltype: function (data, callback) {
         console.log(data);
         var sql = `SELECT
         property.pro_id,
@@ -16,12 +16,13 @@ var location = {
         property.pro_bedroom,
         property.pro_toilet,
         property.pro_status,
-        SUBSTRING(property.pro_post,1,10) AS pro_post,
-        SUBSTRING(property.end_date,1,10) AS end_date,
+        property.pro_post,
+        property.end_date,
         property.pro_views,
         property.longtitude,
         property.latitude,
         customer.email_id,
+        customer.password,
         customer.fname,
         customer.lname,
         customer.id_line,
@@ -68,9 +69,10 @@ var location = {
         LEFT JOIN type_pro ON property.type_id = type_pro.type_id
         INNER JOIN province ON location.province_id = province.province_id
         INNER JOIN zone ON province.zone_id = zone.zone_id
-				WHERE property.location_id =  ${data.location_id} and
-							type_pro.type_id = ${data.type_id} and 
-							property.pro_status = 'เผยแพร่'
+				WHERE  
+				type_pro.type_id = '${data.type_id}' and
+				property.pro_sell = '${data.pro_sell}' AND
+				property.pro_status = 'เผยแพร่'
 				ORDER BY  pro_post ASC`
 
         console.log(sql);
@@ -78,5 +80,4 @@ var location = {
     }
 
 }
-module.exports = location;
-
+module.exports = selltype;

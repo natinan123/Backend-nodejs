@@ -91,45 +91,136 @@ router.get('/:pro_id', function (req, res) {
             var pro20 = row[0].image20;
             var image20 = fs.readFileSync(partImage.property + pro20, 'base64');
         }
-  
-        var avatar = [{
-          
-            image1,
-            image2,
-            image3,
-            image4,
-            image5,
-            image6,
-            image7,
-            image8,
-            image9,
-            image10,
-            image11,
-            image12,
-            image13,
-            image14,
-            image15,
-            image16,
-            image17,
-            image18,
-            image19,
-            image20,
-        }]
-        res.json(avatar)
 
-        // console.log(image2);
-        // console.log(image3);
-        // console.log(image4);
-        // console.log(image5);
-        // console.log(image6);
-        // console.log(image7);
-        // console.log(image8);
-        // console.log(image9);
-        // console.log(image10);
+        var result = []
+        if (image1 != null) {
+            result.push(
+                { image: image1 }
+            )
+        }
+        if (image2 != null) {
+            result.push(
+                { image: image2 }
+            )
+        }
+        if (image3 != null) {
+            result.push(
+                { image: image3 }
+            )
+        }
+        if (image4 != null) {
+            result.push(
+                { image: image4 }
+            )
+        }
+        if (image5 != null) {
+            result.push(
+                { image: image5 }
+            )
+        }
+        if (image6 != null) {
+            result.push(
+                { image: image6 }
+            )
+        }
+        if (image7 != null) {
+            result.push(
+                { image: image7 }
+            )
+        }if (image9 != null) {
+            result.push(
+                { image: image9 }
+            )
+        }
+        if (image10 != null) {
+            result.push(
+                { image: image10 }
+            )
+        }
+        if (image11 != null) {
+            result.push(
+                { image: image11 }
+            )
+        }
+        if (image12 != null) {
+            result.push(
+                { image: image12 }
+            )
+        }if (image13 != null) {
+            result.push(
+                { image: image13 }
+            )
+        }
+        if (image14 != null) {
+            result.push(
+                { image: image14 }
+            )
+        }
+        if (image15 != null) {
+            result.push(
+                { image: image15 }
+            )
+        }
+        if (image16 != null) {
+            result.push(
+                { image: image16 }
+            )
+        }
+        if (image17 != null) {
+            result.push(
+                { image: image17 }
+            )
+        }
+        if (image18 != null) {
+            result.push(
+                { image: image18 }
+            )
+        }
+        if (image19 != null) {
+            result.push(
+                { image: image19 }
+            )
+        }
+        if (image20 != null) {
+            result.push(
+                { image: image20 }
+            )
+        }
+
+
+        res.json(result)
+
+
+        // var avatar = [{
+
+        //     image: image1,
+        //     image: image2,
+        //     image: image3,
+        //     image: image4,
+        //     image: image5,
+        //     image: image6,
+        //     image: image7,
+        //     image: image8,
+        //     image: image9,
+        //     image: image10,
+        //     image: image11,
+        //     image: image12,
+        //     image: image13,
+        //     image: image14,
+        //     image: image15,
+        //     image: image16,
+        //     image: image17,
+        //     image: image18,
+        //     image: image19,
+        //     image: image20,
+        // }]
+        // res.json(avatar)
 
 
 
-       
+
+
+
 
 
 

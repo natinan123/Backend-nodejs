@@ -69,7 +69,7 @@ router.get('/',function(req,res,next){
                 provin_name: row[i].provin_name,
                 zone_id: row[i].zone_id,
                 zone_name: row[i].zone_name,
-                // image1: fs.readFileSync(partImage.property + element, 'base64')
+                image1: fs.readFileSync(partImage.property + element, 'base64')
             })
             // console.log(result)
         }

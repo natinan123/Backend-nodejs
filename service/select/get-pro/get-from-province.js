@@ -1,7 +1,7 @@
 var db = require('../../../dbcon');
 var provin = {
-    provin: function (data, callback) {
-        var sql = `SELECT
+  provin: function (data, callback) {
+    var sql = `SELECT
         property.pro_id,
         property.pro_head,
         type_pro.type_id,
@@ -67,11 +67,13 @@ var provin = {
         LEFT JOIN type_pro ON property.type_id = type_pro.type_id
         INNER JOIN province ON location.province_id = province.province_id
         INNER JOIN zone ON province.zone_id = zone.zone_id
-				WHERE province.province_id =  ? `
-        var province_id = data;
+        WHERE province.province_id = ${data.province_id} and
+				not property.location_id =  ${data.location_id}
+        LIMIT 4 ; `
 
-        return db.query(sql, [province_id], callback);
-    }
+    console.log(sql);
+    return db.query(sql, callback);
+  }
 
 }
 module.exports = provin;

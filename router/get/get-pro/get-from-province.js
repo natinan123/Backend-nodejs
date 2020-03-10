@@ -5,9 +5,10 @@ const fs = require('fs');
 var partImage = require('../../partImage');
 var moment = require('moment'); moment.locale('th'); // เวลา
 
-router.get('/:province_id', function (req, res, next) {
-    // var data=req.body
-    var data = req.params.province_id
+router.post('/', function (req, res, next) {
+    var data = req.body
+    // var data = req.params.province_id
+    console.log(data);
     provin.provin(data, (err, row) => {
         let result = []
         for (let i = 0; i < row.length; i++) {

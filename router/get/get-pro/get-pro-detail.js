@@ -3,6 +3,7 @@ var router = express.Router();
 var prodetail = require('../../../service/select/get-pro/get-pro-detail');
 const fs = require('fs');
 var partImage = require('../../partImage');
+var moment = require('moment'); moment.locale('th'); // เวลา
 
 
 router.get('/:pro_id', function (req, res, next) {
@@ -12,91 +13,6 @@ router.get('/:pro_id', function (req, res, next) {
 
 
 
-        if (row[0].image1 != 'undefined') {
-            var pro1 = row[0].image1;
-            var image1 = fs.readFileSync(partImage.property + pro1, 'base64');
-
-
-
-        }
-        if (row[0].image2 != 'undefined') {
-            var pro2 = row[0].image2;
-            var image2 = fs.readFileSync(partImage.property + pro2, 'base64');
-
-        }
-        if (row[0].image3 != 'undefined') {
-            var pro3 = row[0].image3;
-            var image3 = fs.readFileSync(partImage.property + pro3, 'base64');
-        }
-        if (row[0].image4 != 'undefined') {
-            var pro4 = row[0].image4;
-            var image4 = fs.readFileSync(partImage.property + pro4, 'base64');
-        }
-        if (row[0].image5 != 'undefined') {
-            var pro5 = row[0].image5;
-            var image5 = fs.readFileSync(partImage.property + pro5, 'base64');
-        }
-        if (row[0].image6 != 'undefined') {
-            var pro6 = row[0].image6;
-            var image6 = fs.readFileSync(partImage.property + pro6, 'base64');
-        }
-        if (row[0].image7 != 'undefined') {
-            var pro7 = row[0].image7;
-            var image7 = fs.readFileSync(partImage.property + pro7, 'base64');
-        }
-        if (row[0].image8 != 'undefined') {
-            var pro8 = row[0].image8;
-            var image8 = fs.readFileSync(partImage.property + pro8, 'base64');
-        }
-        if (row[0].image9 != 'undefined') {
-            var pro9 = row[0].image9;
-            var image9 = fs.readFileSync(partImage.property + pro9, 'base64');
-        }
-        if (row[0].image10 != 'undefined') {
-            var pro10 = row[0].image10;
-            var image10 = fs.readFileSync(partImage.property + pro10, 'base64');
-        }
-        if (row[0].image11 != 'undefined') {
-            var pro11 = row[0].image11;
-            var image11 = fs.readFileSync(partImage.property + pro11, 'base64');
-        }
-        if (row[0].image12 != 'undefined') {
-            var pro12 = row[0].image12;
-            var image12 = fs.readFileSync(partImage.property + pro12, 'base64');
-
-        }
-        if (row[0].image13 != 'undefined') {
-            var pro13 = row[0].image13;
-            var image13 = fs.readFileSync(partImage.property + pro13, 'base64');
-        }
-        if (row[0].image14 != 'undefined') {
-            var pro14 = row[0].image14;
-            var image14 = fs.readFileSync(partImage.property + pro14, 'base64');
-        }
-        if (row[0].image15 != 'undefined') {
-            var pro15 = row[0].image15;
-            var image15 = fs.readFileSync(partImage.property + pro15, 'base64');
-        }
-        if (row[0].image16 != 'undefined') {
-            var pro16 = row[0].image16;
-            var image16 = fs.readFileSync(partImage.property + pro16, 'base64');
-        }
-        if (row[0].image17 != 'undefined') {
-            var pro17 = row[0].image17;
-            var image17 = fs.readFileSync(partImage.property + pro17, 'base64');
-        }
-        if (row[0].image18 != 'undefined') {
-            var pro18 = row[0].image18;
-            var image18 = fs.readFileSync(partImage.property + pro18, 'base64');
-        }
-        if (row[0].image19 != 'undefined') {
-            var pro19 = row[0].image19;
-            var image19 = fs.readFileSync(partImage.property + pro19, 'base64');
-        }
-        if (row[0].image20 != 'undefined') {
-            var pro20 = row[0].image20;
-            var image20 = fs.readFileSync(partImage.property + pro20, 'base64');
-        }
 
         var pro_id = row[0].pro_id;
         var pro_head = row[0].pro_head;
@@ -112,8 +28,8 @@ router.get('/:pro_id', function (req, res, next) {
         var pro_views = row[0].pro_views;
         var latitude = row[0].latitude;
         var longtitude = row[0].longtitude;
-        var pro_post = row[0].pro_post;
-        var end_date = row[0].end_date;
+        var pro_post = moment(row[0].pro_post, "YYYYMMDD").fromNow();
+        var end_date = moment(row[0].end_date, "YYYYMMDD").fromNow();
         var location_id = row[0].location_id;
         var type_id = row[0].type_id;
         var style_id = row[0].style_id;
@@ -142,7 +58,6 @@ router.get('/:pro_id', function (req, res, next) {
         var lname = row[0].lname;
         var id_line = row[0].id_line;
         var facebook = row[0].facebook;
-        var profile_pic = row[0].profile_pic;
         var cus_detail = row[0].cus_detail;
         var phone = row[0].phone;
         var loc_name = row[0].loc_name;
@@ -151,7 +66,7 @@ router.get('/:pro_id', function (req, res, next) {
         var provin_name = row[0].provin_name;
         var zone_id = row[0].zone_id;
         var zone_name = row[0].zone_name;
-
+        var profile_pic = fs.readFileSync(partImage.avatar + row[0].profile_pic, 'base64');
         var result = [{
             pro_id,
             pro_head,
@@ -197,7 +112,6 @@ router.get('/:pro_id', function (req, res, next) {
             lname,
             id_line,
             facebook,
-            profile_pic,
             cus_detail,
             phone,
             loc_name,
@@ -206,26 +120,8 @@ router.get('/:pro_id', function (req, res, next) {
             provin_name,
             zone_id,
             zone_name,
-            image1,
-            image2,
-            image3,
-            image4,
-            image5,
-            image6,
-            image7,
-            image8,
-            image9,
-            image10,
-            image11,
-            image12,
-            image13,
-            image14,
-            image15,
-            image16,
-            image17,
-            image18,
-            image19,
-            image20
+            profile_pic,
+
         }]
 
 

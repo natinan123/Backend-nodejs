@@ -1,18 +1,15 @@
 var db = require('../../../dbcon');
 var packet = {
-    packet: function ( callback) {
-
-        
-
+    packet: function (data, callback) {
+        console.log(data);
         var sql = `SELECT
                             packet.packet_id,
                             packet.packet_image,
                             packet.pro_id,
                             packet.packet_date,
                             property.pro_head,
-                            type_pro.type_id,
-                            type_pro.type_name,
                             property.pro_sell,
+                            property.pro_detail,
                             property.pro_area,
                             property.pro_space,
                             property.price,
@@ -20,22 +17,44 @@ var packet = {
                             property.pro_bedroom,
                             property.pro_toilet,
                             property.pro_status,
+                            property.pro_views,
+                            property.latitude,
+                            property.longtitude,
                             property.pro_post,
                             property.end_date,
-                            property.pro_views,
-                            property.longtitude,
-                            property.latitude,
+                            property.location_id,
+                            property.type_id,
+                            style.style_id,
+                            style.style1,
+                            style.style2,
+                            style.style3,
+                            style.style4,
+                            style.style5,
+                            style.style6,
+                            style.style7,
+                            style.style8,
+                            style.style9,
+                            style.style10,
+                            style.style11,
+                            style.style12,
+                            style.style13,
+                            style.style14,
+                            style.style15,
+                            style.style16,
+                            style.style17,
+                            style.style18,
+                            style.style19,
+                            style.style20,
                             customer.email_id,
                             customer.fname,
                             customer.lname,
                             customer.id_line,
                             customer.facebook,
                             customer.profile_pic,
-                            customer.cus_status,
+                            customer.cus_detail,
                             customer.phone,
-                            image.image1,
-                            property.location_id,
                             location.loc_name,
+                            type_pro.type_name,
                             province.province_id,
                             province.provin_name,
                             zone.zone_id,
@@ -50,9 +69,9 @@ var packet = {
                             LEFT JOIN type_pro ON property.type_id = type_pro.type_id
                             INNER JOIN province ON location.province_id = province.province_id
                             INNER JOIN zone ON province.zone_id = zone.zone_id
-                            WHERE property.pro_status = 'เผยแพร่'
+                            WHERE packet.pro_id = '${data.pro_id}'
                             ORDER BY packet_date ASC`
-        console.log(sql);
+        // console.log(sql);
         return db.query(sql, callback);
     }
 

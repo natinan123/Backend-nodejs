@@ -62,6 +62,7 @@ var postdraftstyle = require('./router/post/post-pro/post-pro-draft-style');
 var postproimage = require('./router/post/post-image/post-pro-image');
 var postFavorate = require('./router/post/post-favorite');
 var post_packet = require('./router/post/post-pro/post-packet')
+var post_recom = require('./router/post/post-recom/post_recom')
 
 
 // todo :get
@@ -133,6 +134,8 @@ var follow = require('./router/get/get-pro/get-mainpage/get_follow')
 var guide_price = require('./router/get/get-pro/get-pro-seller/guide_price')
 var pro_public = require('./router/get/get-pro/get-pro-public')
 var packet = require('./router/get/get-require/get-packet')
+var pack_detail = require('./router/get/get-require/get-packet-detail')
+var get_selltype = require('./router/get/get-sell/get-sell-type')
 // todo :select
 // ? get version 2
 
@@ -140,7 +143,6 @@ var packet = require('./router/get/get-require/get-packet')
 
 // todo :put
 var putlocation = require('./router/put/put-location');
-var putrecom = require('./router/put/put-recom');
 var propublish = require('./router/put/put-status-pro-Publish');
 var prodraft = require('./router/put/put-status-pro-draft');
 var promodify = require('./router/put/put-status-pro-modify');
@@ -156,6 +158,8 @@ var expire = require('./router/put/put-expire-pro')
 var deletelocation = require('./router/delete/delete-location');
 var deletereq = require('./router/delete/delete-req');
 var unfollow = require('./router/delete/un_follow');
+var delete_recom = require('./router/delete/delete-recom')
+var delete_packet = require('./router/delete/delete-packet')
 
 // todo : test
 var testgetimage = require('./router/test/get-image');
@@ -237,7 +241,7 @@ app.use('/requirement', requirement);                   // ความต้อ
 app.use('/reqmatch', reqmatch);                         // รายการต้องการ ตรงกัน  
 app.use('/gettest', gettest);                           // test
 app.use('/getnameavatar', getnameavatar);               // รูป avatar ที่ใช้
-app.use('/getnamepro', getnamepro);                     // รูป รายละเอียด property test ที่ใช้
+app.use('/getnamepro', getnamepro);                     // รูป รายละเอียด property ที่ใช้
 app.use('/proFromLocat', proFromLocat);                 // รายการ เจ้าของอสัง จากเขต
 app.use('/proFromProvin', proFromProvin);               // รายการ เจ้าของอสัง จากจังหวัด
 app.use('/proFromprice', proFromprice);                 // รายการ ของอสัง จากราคา
@@ -247,6 +251,8 @@ app.use('/follow', follow);                             // เช็ค อส�
 app.use('/guide_price', guide_price);                   // ราคาแนะนำ
 app.use('/pro_public', pro_public);                     // รายการ อสัง เผยแพร่
 app.use('/packet', packet);                             // รายการส่งมาร้องขอแนะนำ
+app.use('/pack_detail', pack_detail);                   // รายละเอียดร้องขอแนะนำ
+app.use('/get_selltype', get_selltype);                         // รายการเช่า - ขาย ตามประเภท
 
 
 
@@ -259,7 +265,6 @@ app.use('/packet', packet);                             // รายการส
 
 //  todo :update 
 app.use('/putlocation', putlocation);                   //  ทำเล
-app.use('/putrecom', putrecom);                         // รายการแนะนำ
 app.use('/propublish', propublish);                     // สถานะ อสังหา เผยแพร่
 app.use('/prodraft', prodraft);                         // สถานะ อสังหา ร่าง
 app.use('/promodify', promodify);                       // สถานะ อสังหา แก้ไข
@@ -287,7 +292,8 @@ app.use('/postpro', postpro);                           // เพิ่มอส
 app.use('/poststyle', poststyle);                       // เพิ่มอสังหา style
 app.use('/postdraft', postdraft);                       // เพิ่มอสังหา ร่าง
 app.use('/postdraftstyle', postdraftstyle);             // เพิ่มอสังหา ร่าง style
-app.use('/post_packet', post_packet);                   // ส่งไปรายการแนะนำ
+app.use('/post_packet', post_packet);                   // ส่งร้องขอไปรายการแนะนำ
+app.use('/post_recom', post_recom);                     // ส่งไปรายการแนะนำ
 
 
 
@@ -295,7 +301,9 @@ app.use('/post_packet', post_packet);                   // ส่งไปรา
 // todo :delete
 app.use('/deletelocation', deletelocation);
 app.use('/deletereq', deletereq);
-app.use('/unfollow', unfollow);             // Un follow
+app.use('/unfollow', unfollow);                         // Un follow
+app.use('/delete_recom', delete_recom);                 // ลบ recom
+app.use('/delete_packet', delete_packet);                 // ลบ packet
 
 
 
@@ -357,8 +365,8 @@ io.on('connection', function (socket) {
   socket.on('new-message', newMessage);
 
   socket.emit('msg', { msg: 'Welcome bro!' });
-  socket.on('msg',function(msg){
-    socket.emit('msg', { msg: "you sent : "+msg });
+  socket.on('msg', function (msg) {
+    socket.emit('msg', { msg: "you sent : " + msg });
     console.log(msg);
   })
 

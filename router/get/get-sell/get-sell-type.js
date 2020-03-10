@@ -1,19 +1,21 @@
 var express = require('express');
 var router = express.Router();
-var location = require('../../../service/select/get-pro/get-from-location');
 const fs = require('fs');
 var partImage = require('../../partImage');
 var moment = require('moment'); moment.locale('th'); // เวลา
 
+var selltype = require('../../../service/select/get-sell/get-sell-type');
+
 router.post('/', function (req, res, next) {
     var data = req.body
-    // var data = req.params.location_id
-    console.log(req.body);
-    location.location(data, (err, row) => {
+    // var data = req.params.email_id
+    console.log(data);
+    selltype.selltype(data, (err, row) => {
+
         let result = []
         for (let i = 0; i < row.length; i++) {
             var element = row[i].image1
-            // console.log(element);
+            console.log(element);
             result.push(data = {
                 pro_id: row[i].pro_id,
                 pro_head: row[i].pro_head,
@@ -34,6 +36,7 @@ router.post('/', function (req, res, next) {
                 longtitude: row[i].longtitude,
                 latitude: row[i].latitude,
                 email_id: row[i].email_id,
+                password: row[i].password,
                 fname: row[i].fname,
                 lname: row[i].lname,
                 id_line: row[i].id_line,
@@ -42,7 +45,6 @@ router.post('/', function (req, res, next) {
                 cus_detail: row[i].cus_detail,
                 cus_status: row[i].cus_status,
                 phone: row[i].phone,
-                image_id: row[i].image_id,
                 style_id: row[i].style_id,
                 style1: row[i].style1,
                 style2: row[i].style2,
@@ -88,7 +90,7 @@ router.post('/', function (req, res, next) {
             );
         }
 
-
     })
 });
 module.exports = router;
+
