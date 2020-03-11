@@ -24,7 +24,7 @@ router.get('/:email_id', function (req, res, next) {
                 pro_detail: row[i].pro_detail,
                 pro_area: row[i].pro_area,
                 pro_space: row[i].pro_space,
-                price: row[i].price,
+                price: row[i].price,    
                 pro_floor: row[i].pro_floor,
                 pro_bedroom: row[i].pro_bedroom,
                 pro_toilet: row[i].pro_toilet,

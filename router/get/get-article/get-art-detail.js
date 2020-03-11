@@ -5,6 +5,8 @@ var partImage = require('../../partImage');
 var artdetail = require('../../../service/select/get-article/get-art-detial');
 const fs = require('fs');
 
+var moment = require('moment'); moment.locale('th'); // เวลา
+
 router.get('/:article_id', function (req, res, next) {
     // var data=req.body
     var data = req.params.article_id
@@ -31,8 +33,8 @@ router.get('/:article_id', function (req, res, next) {
         var art_detail1 = row[0].art_detail1;
         var art_detail2 = row[0].art_detail2;
         var art_type = row[0].art_type;
-        var art_date = row[0].art_date;
-        var art_view = row[0].art_vie;
+        var art_date =  moment(row[0].art_date, "YYYYMMDD").fromNow();
+        var art_view = row[0].art_view;
 
         var result = [{
             article_id,
