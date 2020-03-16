@@ -10,7 +10,7 @@ var chat = {
                             message.source,
                             message.descination,
                             message.mes_text,
-                            SUBSTRING(message.time_stamp,1,10) AS time_stamp,
+                            message.time_stamp,
                             customer.fname,
                             customer.lname,
                             customer.profile_pic
