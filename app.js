@@ -14,11 +14,22 @@ var server = http.createServer(app);
 var io = require('socket.io').listen(server)
 module.exports = io;
 
-// todo : email 
-var mailer = require("nodemailer");
+
 // ! end email
 
+const nodemailer = require('nodemailer');
 
+// setup mail transporter service
+const transporter = nodemailer.createTransport({
+  service: 'gmail',
+  auth: {
+    // user: 'rmuttproperty@gmail.com', // your email
+    // pass: 'cpe58346'              // your password
+    user: 'natinan30@gmail.com', // your email
+    pass: '180040022'              // your password
+  }
+});
+var rand, mailOptions, host, link;
 
 
 
@@ -136,6 +147,7 @@ var pro_public = require('./router/get/get-pro/get-pro-public')
 var packet = require('./router/get/get-require/get-packet')
 var pack_detail = require('./router/get/get-require/get-packet-detail')
 var get_selltype = require('./router/get/get-sell/get-sell-type')
+var get_user = require('./router/test/chat/get-user')
 // todo :select
 // ? get version 2
 
@@ -252,7 +264,8 @@ app.use('/guide_price', guide_price);                   // ราคาแนะ
 app.use('/pro_public', pro_public);                     // รายการ อสัง เผยแพร่
 app.use('/packet', packet);                             // รายการส่งมาร้องขอแนะนำ
 app.use('/pack_detail', pack_detail);                   // รายละเอียดร้องขอแนะนำ
-app.use('/get_selltype', get_selltype);                         // รายการเช่า - ขาย ตามประเภท
+app.use('/get_selltype', get_selltype);                 // รายการเช่า - ขาย ตามประเภท
+app.use('/get_user', get_user);                         // รายชื่อ
 
 
 
@@ -303,7 +316,7 @@ app.use('/deletelocation', deletelocation);
 app.use('/deletereq', deletereq);
 app.use('/unfollow', unfollow);                         // Un follow
 app.use('/delete_recom', delete_recom);                 // ลบ recom
-app.use('/delete_packet', delete_packet);                 // ลบ packet
+app.use('/delete_packet', delete_packet);               // ลบ packet
 
 
 
@@ -329,7 +342,44 @@ app.use('/testgetimage', testgetimage);                           // ลอง�
 // email
 app.use('/email', email);                       // email
 
+app.get('/send', function (req, res) {
+  rand = Math.floor((Math.random() * 100) + 54);
+  host = req.get('host');
+  link = "http://" + req.get('host') + "/verify?id=" + rand;
+  mailOptions = {
+    to: req.query.to,
+    subject: "Please confirm your Email account",
+    html: "Hello,<br> Please Click on the link to verify your email.<br><a href=" + link + ">Click here to verify</a>"
+  }
+  console.log(mailOptions);
+  transporter.sendMail(mailOptions, function (error, response) {
+    if (error) {
+      console.log(error);
+      res.end("error");
+    } else {
+      console.log("Message sent: " + response.message);
+      res.end("sent");
+    }
+  });
+});
 
+app.get('/verify', function (req, res) {
+  console.log(req.protocol + ":/" + req.get('host'));
+  if ((req.protocol + "://" + req.get('host')) == ("http://" + host)) {
+    console.log("Domain is matched. Information is from Authentic email");
+    if (req.query.id == rand) {
+      console.log("email is verified");
+      res.end("<h1>Email " + mailOptions.to + " is been Successfully verified");
+    }
+    else {
+      console.log("email is not verified");
+      res.end("<h1>Bad Request</h1>");
+    }
+  }
+  else {
+    res.end("<h1>Request is from unknown source");
+  }
+});
 
 // end part ^^
 

@@ -24,7 +24,7 @@ app.get('/', function (req, res) {
 app.get('/send', function (req, res) {
     rand = Math.floor((Math.random() * 100) + 54);
     host = req.get('host');
-    link = "http://localhost:4200/mainpage/mainpage/home" + req.get('host') + "/verify?id=" + rand;
+    link = "http://localhost:4200/mainpage/verify" + req.get('host') + "/verify?id=" + rand;
     mailOptions = {
         to: req.query.to,
         subject: "Please confirm your Email account",
