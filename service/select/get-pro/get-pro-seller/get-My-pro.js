@@ -15,7 +15,7 @@ var Mypro = {
         property.pro_bedroom,
         property.pro_toilet,
         property.pro_status,
-        SUBSTRING(property.pro_post,1,10) AS pro_post,
+        property.pro_post,
         SUBSTRING(property.end_date,1,10) AS end_date,
         property.pro_views,
         property.longtitude,
