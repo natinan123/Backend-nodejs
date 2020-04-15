@@ -12,7 +12,7 @@ var register = {
         var sql = `INSERT INTO customer (email_id, password, fname, lname, phone, id_line, cus_status,profile_pic) 
         VALUES('${data.email_id}', ${data.password}, '${data.fname}','${data.lname}' ,'${data.phone}','${data.id_line}','${data.cus_status}', '${dataimage}');`
         console.log(sql);
-        return db.query(sql, [email_id, password, fname, lname, phone, id_line, cus_status, dataimage], callback);
+        return db.query(sql,  callback);
     }
 
 }
